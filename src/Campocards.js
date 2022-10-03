@@ -12,17 +12,17 @@ function Zap(props) {
     function Abrepergunta() {
         setEstado(estado + 1);
     }
-    function funcaoZAP (){
+    function funcaoZAP() {
         setZap(2)
         setEstado(estado + 1);
         props.concluir(1);
     }
-    function funcaoErro (){
+    function funcaoErro() {
         setZap(1)
         setEstado(estado + 1);
         props.concluir(3);
     }
-    function funcaoQuase(){
+    function funcaoQuase() {
         setZap(3)
         setEstado(estado + 1);
         props.concluir(2);
@@ -42,18 +42,18 @@ function Zap(props) {
             <Perguntaaberta>
                 <p>{props.answer}</p>
                 <caixabotoes>
-                    <button onClick={funcaoErro}> Não lembrei</button>
-                    <button onClick={funcaoQuase}>Quase não lembrei</button>
-                    <button onClick={funcaoZAP}> Truco com Zap!</button>
+                    <Button num= {1} onClick={funcaoErro}> Não lembrei</Button>
+                    <Button num= {2} onClick={funcaoQuase}>Quase não lembrei</Button>
+                    <Button num= {3} onClick={funcaoZAP}> Truco com Zap!</Button>
                 </caixabotoes>
             </Perguntaaberta>
         )
     }
     if (estado === 3) {
         return (
-            <Perguntaconcluida concluido = {zap}>
+            <Perguntaconcluida concluido={zap}>
                 <p>Pergunta {props.numero}</p>
-                <img src = { zap === 3? quase : (zap === 2 ? Certo : Erro )} />
+                <img src={zap === 3 ? quase : (zap === 2 ? Certo : Erro)} />
             </Perguntaconcluida>
         )
     } else {
@@ -72,14 +72,14 @@ export default function Campocards(props) {
 
 
     const zaps = [
-        { zap :0,  situacao: 0, index: 1, question: "O que é JSX?", answer: "Uma extensão de linguagem do JavaScript" },
-        { zap :0, situacao: 0, index: 2, question: "O React é ___", answer: "Uma biblioteca JavaScript para construção de interfaces" },
-        { zap :0, situacao: 0, index: 3, question: "Componentes devem iniciar com ____", answer: "Letra Maiúscula" },
-        { zap :0, situacao: 0, index: 4, question: "Podemos colocar ___ dentro do JSX", answer: "expressões" },
-        { zap :0, situacao: 0, index: 5, question: "O ReactDOM nos ajuda ____?", answer: "Interagindo com a DOM para colocar componentes React" },
-        { zap :0, situacao: 0, index: 6, question: "Usamos o npm para ____?", answer: "gerenciar os pacotes necessários e suas dependencias" },
-        { zap :0, situacao: 0, index: 7, question: "Usamos props para____", answer: "Passar diferentes informações para os componentes" },
-        { zap :0, situacao: 0, index: 8, question: "Usamos estado (state) para ___", answer: "dizer para o React quais informações quando atualizadas devem renderizar a tela novamente" }
+        { zap: 0, situacao: 0, index: 1, question: "O que é JSX?", answer: "Uma extensão de linguagem do JavaScript" },
+        { zap: 0, situacao: 0, index: 2, question: "O React é ___", answer: "Uma biblioteca JavaScript para construção de interfaces" },
+        { zap: 0, situacao: 0, index: 3, question: "Componentes devem iniciar com ____", answer: "Letra Maiúscula" },
+        { zap: 0, situacao: 0, index: 4, question: "Podemos colocar ___ dentro do JSX", answer: "expressões" },
+        { zap: 0, situacao: 0, index: 5, question: "O ReactDOM nos ajuda ____?", answer: "Interagindo com a DOM para colocar componentes React" },
+        { zap: 0, situacao: 0, index: 6, question: "Usamos o npm para ____?", answer: "gerenciar os pacotes necessários e suas dependencias" },
+        { zap: 0, situacao: 0, index: 7, question: "Usamos props para____", answer: "Passar diferentes informações para os componentes" },
+        { zap: 0, situacao: 0, index: 8, question: "Usamos estado (state) para ___", answer: "dizer para o React quais informações quando atualizadas devem renderizar a tela novamente" }
     ];
 
     return (
@@ -89,9 +89,9 @@ export default function Campocards(props) {
                 question={s.question}
                 answer={s.answer}
                 estado={s.situacao}
-                estadozap = {s.zap}
-                concluidos = {props.terminados}
-                concluir = {props.funcao}
+                estadozap={s.zap}
+                concluidos={props.terminados}
+                concluir={props.funcao}
             />)}
         </Caixacampo>
 
@@ -101,7 +101,7 @@ const Perguntaaberta = styled.div`
 width: 300px;
   margin: 12px;
   padding: 15px;
-  min-height: 100px;
+  min-height: 150px;
   background: #FFFFD5;
   box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
   border-radius: 5px;
@@ -117,10 +117,14 @@ width: 300px;
   justify-content: space-between;
   img{ position: absolute;
     bottom: 10px;
-    right: 10px;}`; 
+    right: 10px;}
+&&:red{
+    color: red;
+}`
+    ;
 const Perguntaconcluida = styled.div`
 text-decoration: line-through;
-color: ${(props) => props.concluido === 1? "#FF3030" : (props.concluido === 3? "#FF922E" : "#2FBE34") };
+color: ${(props) => props.concluido === 1 ? "#FF3030" : (props.concluido === 3 ? "#FF922E" : "#2FBE34")};
 width: 300px;
   height: 35px;
   background-color: #FFFFFF;
@@ -138,7 +142,7 @@ position: absolute;
 top: 100px;
 overflow-y: scroll;
 width: 375px;
-height: 350px;
+height: 400px;
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -154,9 +158,10 @@ caixabotoes{
     justify-content: space-around;
 
 }
-button{
+`
+const Button = styled.button`
     width: 85px;
-    height:33px;
+    height:40px;
     font-family: 'Recursive';
     font-style: normal;
     font-weight: 400;
@@ -166,4 +171,11 @@ button{
     justify-content: center;
     text-align: center;
     margin-right: 5px;
-}`
+    margin-left: 8px;
+    font-size: 12px;      
+    color: #FFFFFF;  
+    border-radius: 5px;
+    border: 1px solid grey;
+    padding:5px;
+    background-color: ${(props) => props.num === 1 ? "red" : (props.num === 2? "#FF922E" : "#2FBE34") };
+    color: white;`

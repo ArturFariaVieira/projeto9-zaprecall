@@ -2,33 +2,31 @@ import React from "react"
 import styled from "styled-components"
 import Logo from "./img/logo.png"
 import Campocards from "./Campocards"
-import Certo from "./img/icone_certo.png"
-import Erro from "./img/icone_erro.png"
-import quase from "./img/icone_quase.png"
 
 export default function Corpo(props) {
    
     
     const [concluidos, setConcluidos]= React.useState(0)
-    const [arrayicones, setArrayicones] = React.useState([0])
-    let concluir = function (index){
+    const [textometa, setTextometa] = React.useState("")
+    const [zaps, setZaps] = React.useState(0)
+
+    let concluir = function (num){
         setConcluidos(concluidos+1)
-        if(index === 1){
-            let newarray = arrayicones;
-            newarray.push(Certo)
-            setArrayicones(...newarray)
-            console.log(arrayicones)
+        console.log(props.metazapps)
+        console.log(concluidos)
+        if(num === 1){
+            setZaps(zaps+1)
         }
-        if(index === 2){
-            let icone = quase;
-            setArrayicones(...quase)
-            console.log(arrayicones)
-        }
-        if(index === 3){
+        if(concluidos === 7){
             
-            setArrayicones(...Erro)
-            console.log(arrayicones)
+            if(zaps >= props.metazapps){
+                setTextometa("Parabéns, você atingiu sua meta!")
+            }
+            else{
+                setTextometa("Oh não! Você não bateu a meta, mula.")
+            }
         }
+        
         
     }
     return(
@@ -40,13 +38,7 @@ export default function Corpo(props) {
             <Campocards terminados={concluidos} funcao = {concluir}  />
             <footer>
                 <h2>{concluidos}/ 8 CONCLUÍDOS</h2>
-                <Caixaicones>
-                    {arrayicones.map((s) => 
-                        <>
-                            <img src={s}/>
-                        </>
-                    )}
-                </Caixaicones>
+                <h2>{textometa}</h2>
 
             </footer>
             
@@ -70,20 +62,22 @@ box-sizing: border-box;
 background-color: #FB6B6B;
 header{
     h2{
-        margin-left: 30px;
+        margin-left: 10px;
+        font-family: Righteous;
+        color: white;
     }
-    font-family: Righteous;
-    color: white;
-    font-size: 16px;
-    margin-left: 50px;
-    margin-top: 15px;
+    
+    font-size: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
     display: flex;
     height: 50px;
-    &&:img{
-        height:52px;
+    img{
+        height:60px;
         width: 60px;
-        margin-right: 40px;
-        margin-top: 15px;
+        margin-right: 10px;
+        margin-top:10px;
 
     };
 };
@@ -98,27 +92,9 @@ footer{
     flex-direction: column;
     font-family: Righteous;
     color: black;
-    font-size: 16px;    
+    font-size: 12px;    
     background-color: white;
-    h2{
-        align-items: center;
-        justify-content: center;
-    }
-   
-};
-    
+     
 }`;
-const Caixaicones = styled.div`
-display: flex;
-height: 50px;
-width: 375px;
-align-items: center;
-justify-content: center;
-    &&:img{
-        height:52px;
-        width: 60px;
-        margin-right: 40px;
-        margin-top: 15px;
+    
 
-    };
-`
